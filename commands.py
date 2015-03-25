@@ -61,7 +61,6 @@ def get_morphologic_kernel(kernel_type, scale):
 
     b = numpy.ones((scale,scale), numpy.uint8)
     kernel = numpy.kron(kernel, b)
-    print kernel
     return kernel
 
 
