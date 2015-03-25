@@ -108,8 +108,6 @@ def ui():
     backupbutton = Tkinter.Button(window, text="clean changes", command=clean_changes)
     backupbutton.grid(row=6, column=1, sticky=W+W)
 
-    load_file()
-
     window.mainloop()
 
 
