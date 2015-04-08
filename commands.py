@@ -73,3 +73,11 @@ def morphologic_blur(kernel_type = 1, scale = 1):
     a = cv2.morphologyEx(MyGlobals.img, cv2.MORPH_OPEN, kernel)
     b = cv2.morphologyEx(a, cv2.MORPH_CLOSE, kernel)
     MyGlobals.img = b
+
+
+def dft():
+    m, n, depth = MyGlobals.img.shape
+    m2 = cv2.getOptimalDFTSize(m)
+    n2 = cv2.getOptimalDFTSize(n)
+    padded = cv2.copyMakeBorder(MyGlobals.img, 0, m2-m, 0, n2-n, cv2.BORDER_CONSTANT, value=[0,0,0,0] )
+    

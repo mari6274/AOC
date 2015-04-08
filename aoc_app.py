@@ -106,7 +106,9 @@ def ui():
     flipybutton = Tkinter.Button(window, text="flip Y axis", command=flip_y)
     flipybutton.grid(row=5, column=2, sticky=W+E)
     backupbutton = Tkinter.Button(window, text="clean changes", command=clean_changes)
-    backupbutton.grid(row=6, column=1, sticky=W+W)
+    backupbutton.grid(row=6, column=1, sticky=W+E)
+    dftbutton = Tkinter.Button(window, text="discrete Fourier transform", command=dft)
+    dftbutton.grid(row=7, column=2, sticky=W+E)
 
     window.mainloop()
 
