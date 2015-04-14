@@ -12,6 +12,7 @@ from commands import *
 
 cv2.namedWindow("PREVIEW", cv2.CV_WINDOW_AUTOSIZE)
 
+
 def img_show():
     while True:
         cv2.imshow("PREVIEW", MyGlobals.img)
@@ -30,7 +31,8 @@ def gauss_ui():
     Tkinter.Label(gauss_window, text="Kernel size y").pack()
     kernel_size_y_spinbox = Tkinter.Spinbox(gauss_window, values=odds)
     kernel_size_y_spinbox.pack()
-    button = Tkinter.Button(gauss_window, text="OK", command = lambda: gauss(kernel_size_x_spinbox.get(), kernel_size_y_spinbox.get()))
+    command = lambda: gauss(kernel_size_x_spinbox.get(), kernel_size_y_spinbox.get())
+    button = Tkinter.Button(gauss_window, text="OK", command=command)
     button.pack()
 
 
@@ -39,12 +41,12 @@ def sobel_ui():
     sobel_window.wm_title("sobel")
 
     Tkinter.Label(sobel_window, text="dx").pack()
-    dx_spinbox = Tkinter.Spinbox(sobel_window, values=list(xrange(0,100)))
+    dx_spinbox = Tkinter.Spinbox(sobel_window, values=list(xrange(0, 100)))
     dx_spinbox.pack()
     Tkinter.Label(sobel_window, text="dy").pack()
-    dy_spinbox = Tkinter.Spinbox(sobel_window, values=list(xrange(0,100)))
+    dy_spinbox = Tkinter.Spinbox(sobel_window, values=list(xrange(0, 100)))
     dy_spinbox.pack()
-    button = Tkinter.Button(sobel_window, text="OK", command = lambda: sobel(dx_spinbox.get(), dy_spinbox.get()))
+    button = Tkinter.Button(sobel_window, text="OK", command=lambda: sobel(dx_spinbox.get(), dy_spinbox.get()))
     button.pack()
 
 
@@ -57,11 +59,23 @@ def morphologic_ui():
     kernel_scale_scale = Tkinter.Scale(morphologic_window, from_=1, to=20, label="kernel size", orient=Tkinter.HORIZONTAL)
     kernel_scale_scale.pack(fill=Tkinter.BOTH, side=Tkinter.TOP)
 
-    button = Tkinter.Button(morphologic_window, text="gradient", command= lambda : morphologic_gradient(kernel_type_scale.get(), kernel_scale_scale.get()))
+    command = lambda: morphological_gradient(kernel_type_scale.get(), kernel_scale_scale.get())
+    button = Tkinter.Button(morphologic_window, text="gradient", command=command)
     button.pack(fill=Tkinter.BOTH, side=Tkinter.LEFT)
 
-    button2 = Tkinter.Button(morphologic_window, text="blur", command= lambda : morphologic_blur(kernel_type_scale.get(), kernel_scale_scale.get()))
+    command = lambda: morphological_blur(kernel_type_scale.get(), kernel_scale_scale.get())
+    button2 = Tkinter.Button(morphologic_window, text="blur", command=command)
     button2.pack(fill=Tkinter.BOTH, side=Tkinter.RIGHT)
+
+
+def skeleton_ui():
+    skeleton_window = Tkinter.Tk()
+    skeleton_window.wm_title("skeleton")
+
+    morph_button = Tkinter.Button(skeleton_window, text="morphologic", command=skeleton_morphological)
+    morph_button.pack(fill=Tkinter.BOTH, side=Tkinter.LEFT)
+    thinning_button = Tkinter.Button(skeleton_window, text="thinning", command=skeleton_thinning)
+    thinning_button.pack(fill=Tkinter.BOTH, side=Tkinter.RIGHT)
 
 
 def load_file():
@@ -109,6 +123,9 @@ def ui():
     backupbutton.grid(row=6, column=1, sticky=W+E)
     dftbutton = Tkinter.Button(window, text="discrete Fourier transform", command=dft)
     dftbutton.grid(row=7, column=2, sticky=W+E)
+
+    skeletonbutton = Tkinter.Button(window, text="Skeleton", command=skeleton_ui)
+    skeletonbutton.grid(row=8, column=1, sticky=W+E)
 
     window.mainloop()
 
