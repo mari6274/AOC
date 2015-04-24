@@ -38,23 +38,20 @@ def flip_y():
 
 
 def morphological_gradient(kernel_type=1, scale=1):
-    MyGlobals.img = to.morphological_gradient(kernel_type, scale)
+    MyGlobals.img = to.morphological_gradient(MyGlobals.img, kernel_type, scale)
 
 
 def morphological_blur(kernel_type=1, scale=1):
-    MyGlobals.img = to.morphological_blur(kernel_type, scale)
+    MyGlobals.img = to.morphological_blur(MyGlobals.img, kernel_type, scale)
 
 
 def dft():
-    m, n, depth = MyGlobals.img.shape
-    m2 = cv2.getOptimalDFTSize(m)
-    n2 = cv2.getOptimalDFTSize(n)
-    padded = cv2.copyMakeBorder(MyGlobals.img, 0, m2-m, 0, n2-n, cv2.BORDER_CONSTANT, value=[0, 0, 0, 0])
-
+    gray_scale()
+    cv2.imshow("dft", to.dft(MyGlobals.img))
 
 def skeleton_morphological():
-    MyGlobals.img = to.skeleton_morphological()
+    MyGlobals.img = to.skeleton_morphological(MyGlobals.img)
 
 
 def skeleton_thinning():
-    MyGlobals.img = tt.skeleton_thinning()
+    MyGlobals.img = tt.skeleton_thinning(MyGlobals.img)

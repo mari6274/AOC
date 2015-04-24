@@ -1,7 +1,7 @@
 __author__ = 'mario'
 import numpy
 import cv2
-from globals import MyGlobals
+from matplotlib import pyplot as plt
 
 
 def get_morphological_kernel(kernel_type, scale):
@@ -38,20 +38,20 @@ def get_morphological_kernel(kernel_type, scale):
     return kernel
 
 
-def morphological_gradient(kernel_type=1, scale=1):
+def morphological_gradient(input_img, kernel_type=1, scale=1):
     kernel = get_morphological_kernel(int(kernel_type), int(scale))
-    return cv2.morphologyEx(MyGlobals.img, cv2.MORPH_GRADIENT, kernel)
+    return cv2.morphologyEx(input_img, cv2.MORPH_GRADIENT, kernel)
 
 
-def morphological_blur(kernel_type=1, scale=1):
+def morphological_blur(input_img, kernel_type=1, scale=1):
     kernel = get_morphological_kernel(int(kernel_type), int(scale))
-    a = cv2.morphologyEx(MyGlobals.img, cv2.MORPH_OPEN, kernel)
+    a = cv2.morphologyEx(input_img, cv2.MORPH_OPEN, kernel)
     b = cv2.morphologyEx(a, cv2.MORPH_CLOSE, kernel)
     return b
 
 
-def skeleton_morphological():
-    ret, img = cv2.threshold(MyGlobals.img, 127, 255, cv2.THRESH_BINARY)
+def skeleton_morphological(input_img):
+    ret, img = cv2.threshold(input_img, 127, 255, cv2.THRESH_BINARY)
     skel = numpy.zeros(img.shape, numpy.uint8)
     element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
 
@@ -66,3 +66,12 @@ def skeleton_morphological():
             break
 
     return skel
+
+
+def dft(input_img):
+    dft_img = cv2.dft(numpy.float32(input_img), flags=cv2.DFT_COMPLEX_OUTPUT)
+    dft_shift = numpy.fft.fftshift(dft_img)
+    magnitude_spectrum = 20*numpy.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1]))
+    magnitude_spectrum = cv2.normalize(magnitude_spectrum, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX)
+
+    return magnitude_spectrum
