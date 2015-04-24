@@ -109,6 +109,8 @@ def ui():
     gaussbutton.grid(row=2, column=1, sticky=W+E)
     sobelbutton = Tkinter.Button(window, text="sobel", command=sobel_ui)
     sobelbutton.grid(row=3, column=1, sticky=W+E)
+    graybutton = Tkinter.Button(window, text="gray scale", command=gray_scale)
+    graybutton.grid(row=3, column=2, sticky=W+E)
     morphologicbutton = Tkinter.Button(window, text="morphologic transformations", command=morphologic_ui)
     morphologicbutton.grid(row=2, column=2, sticky=W+E)
     rotateleftbutton = Tkinter.Button(window, text="rotate left", command=rotate_left)
@@ -123,9 +125,10 @@ def ui():
     backupbutton.grid(row=6, column=1, sticky=W+E)
     dftbutton = Tkinter.Button(window, text="discrete Fourier transform", command=dft)
     dftbutton.grid(row=7, column=2, sticky=W+E)
-
     skeletonbutton = Tkinter.Button(window, text="Skeleton", command=skeleton_ui)
     skeletonbutton.grid(row=8, column=1, sticky=W+E)
+    # segmentationbutton = Tkinter.Button(window, text="Segmentation", segmentation_ui)
+    # segmentationbutton.grid(row=8, column=2, sticky=W+E)
 
     window.mainloop()
 
