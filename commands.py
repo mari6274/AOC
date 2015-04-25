@@ -54,4 +54,9 @@ def skeleton_morphological():
 
 
 def skeleton_thinning():
+    gray_scale()
     MyGlobals.img = tt.skeleton_thinning(MyGlobals.img)
+
+
+def segmentation(k):
+    MyGlobals.img = to.segmentation(MyGlobals.img, k)

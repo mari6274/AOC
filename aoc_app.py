@@ -78,6 +78,18 @@ def skeleton_ui():
     thinning_button.pack(fill=Tkinter.BOTH, side=Tkinter.RIGHT)
 
 
+def segmentation_ui():
+    segmentation_window = Tkinter.Tk()
+    segmentation_window.wm_title("segmentation")
+
+    k_scale = Tkinter.Scale(segmentation_window, from_=1, to=20, label="k", orient=Tkinter.HORIZONTAL)
+    k_scale.pack(fill=Tkinter.BOTH, side=Tkinter.TOP)
+
+    command = lambda: segmentation(k_scale.get())
+    button = Tkinter.Button(segmentation_window, text="segmentation", command=command)
+    button.pack(fill=Tkinter.BOTH, side=Tkinter.BOTTOM)
+
+
 def load_file():
     filename = tkFileDialog.askopenfilename()
     temp = cv2.imread(filename, cv2.CV_WINDOW_AUTOSIZE)
@@ -127,8 +139,8 @@ def ui():
     dftbutton.grid(row=7, column=2, sticky=W+E)
     skeletonbutton = Tkinter.Button(window, text="Skeleton", command=skeleton_ui)
     skeletonbutton.grid(row=8, column=1, sticky=W+E)
-    # segmentationbutton = Tkinter.Button(window, text="Segmentation", segmentation_ui)
-    # segmentationbutton.grid(row=8, column=2, sticky=W+E)
+    segmentationbutton = Tkinter.Button(window, text="Segmentation", command=segmentation_ui)
+    segmentationbutton.grid(row=8, column=2, sticky=W+E)
 
     window.mainloop()
 

@@ -1,8 +1,6 @@
 __author__ = 'mario'
 import numpy
 import cv2
-from matplotlib import pyplot as plt
-
 
 def get_morphological_kernel(kernel_type, scale):
     if kernel_type is 2:
@@ -75,3 +73,16 @@ def dft(input_img):
     magnitude_spectrum = cv2.normalize(magnitude_spectrum, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX)
 
     return magnitude_spectrum
+
+
+def segmentation(input_img, k):
+    Z = input_img.reshape((-1,3))
+    Z = numpy.float32(Z)
+
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+    ret, label, center=cv2.kmeans(Z,k,criteria,10,cv2.KMEANS_RANDOM_CENTERS)
+
+    center = numpy.uint8(center)
+    res = center[label.flatten()]
+    res2 = res.reshape((input_img.shape))
+    return res2
