@@ -141,7 +141,8 @@ def ui():
     skeletonbutton.grid(row=8, column=1, sticky=W+E)
     segmentationbutton = Tkinter.Button(window, text="Segmentation", command=segmentation_ui)
     segmentationbutton.grid(row=8, column=2, sticky=W+E)
-
+    edgesbutton = Tkinter.Button(window, text="Edges", command=edges)
+    edgesbutton.grid(row=9, column=1, sticky=W+E)
     window.mainloop()
 
 

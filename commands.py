@@ -9,10 +9,6 @@ import transformations.others as to
 import transformations.thinning as tt
 
 
-def gray_scale():
-    MyGlobals.img = cv2.cvtColor(MyGlobals.img, cv2.COLOR_BGR2GRAY)
-
-
 def gauss(ksizex, ksizey):
     MyGlobals.img = tf.gauss_filter(MyGlobals.img, ksizex, ksizey)
 
@@ -46,7 +42,6 @@ def morphological_blur(kernel_type=1, scale=1):
 
 
 def dft():
-    gray_scale()
     cv2.imshow("dft", to.dft(MyGlobals.img))
 
 def skeleton_morphological():
@@ -54,9 +49,12 @@ def skeleton_morphological():
 
 
 def skeleton_thinning():
-    gray_scale()
     MyGlobals.img = tt.skeleton_thinning(MyGlobals.img)
 
 
 def segmentation(k):
     MyGlobals.img = to.segmentation(MyGlobals.img, k)
+
+
+def edges():
+    MyGlobals.img = to.edges(MyGlobals.img)

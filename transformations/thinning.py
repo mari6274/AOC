@@ -3,6 +3,7 @@ import cv2
 import numpy
 
 from globals import MyGlobals
+import others as to
 
 
 def thinning_iteration(input_img, iter):
@@ -41,7 +42,7 @@ def thinning_iteration(input_img, iter):
 
 
 def skeleton_thinning(input_img):
-
+    input_img = to.gray_scale(input_img)
     ret, input_img = cv2.threshold(input_img, 127, 255, cv2.THRESH_BINARY)
     input_img = input_img / 255
 
