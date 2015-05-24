@@ -143,7 +143,12 @@ def ui():
     segmentationbutton.grid(row=8, column=2, sticky=W+E)
     edgesbutton = Tkinter.Button(window, text="Edges", command=edges)
     edgesbutton.grid(row=9, column=1, sticky=W+E)
+    cornersbutton = Tkinter.Button(window, text="Corners", command=corners)
+    cornersbutton.grid(row=9, column=2, sticky=W+E)
     window.mainloop()
 
 
 ui()
+
+
+#wstawianie viedo w obraz z daną perspektywą

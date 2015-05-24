@@ -9,6 +9,10 @@ import transformations.others as to
 import transformations.thinning as tt
 
 
+def gray_scale():
+    MyGlobals.img = to.gray_scale(MyGlobals.img)
+
+
 def gauss(ksizex, ksizey):
     MyGlobals.img = tf.gauss_filter(MyGlobals.img, ksizex, ksizey)
 
@@ -58,3 +62,7 @@ def segmentation(k):
 
 def edges():
     MyGlobals.img = to.edges(MyGlobals.img)
+
+
+def corners():
+    MyGlobals.img = to.corners(MyGlobals.img)

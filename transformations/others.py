@@ -123,3 +123,12 @@ def edges2(input_img):
         cv2.line(input_img,(x1,y1),(x2,y2),(0,0,255),2)
 
     return input_img
+
+
+def corners(input_img):
+    gray = gray_scale(input_img)
+    gray = numpy.float32(gray)
+    dst = cv2.cornerHarris(gray, 2, 3, 0.04)
+    dst = cv2.dilate(dst, None)
+    input_img[dst>0.01*dst.max()] = [0,0,255]
+    return input_img
